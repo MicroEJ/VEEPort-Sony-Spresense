@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ANT Buildfile
+
+  Copyright 2019 MicroEJ Corp.
+
+-->
+<project name="gnss-init">
+
+	<import file="${scripts.dir}/extension-init.xml" />
+
+	<target name="context/gnss" extensionOf="init/context">
+		
+	</target>
+	
+	<target name="init/gnss" extensionOf="init/execution">
+		
+	</target>
+	
+	
+	<target name="finalization/gnss" extensionOf="init/finalization">
+		
+	</target>
+	
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	ANT Buildfile
+
+	Copyright 2019 MicroEJ Corp.
+	This Software has been designed or modified by MicroEJ Corp.
+	MicroEJ grants to Metocean the non-exclusive right to freely use, modify and distribute this Software.
+-->
+<project name="audio-s3-extension-init">
+
+	<import file="${scripts.dir}/extension-init.xml" />
+
+	<target name="init/edgepro-extension" extensionOf="init/execution" if="onS3">	
+		<augment id="hil.main.properties">
+			<propertyref name="audio.mock.root" />
+		</augment>
+	</target>
+
+</project>

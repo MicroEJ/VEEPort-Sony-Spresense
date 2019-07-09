@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ANT Buildfile
+
+  Copyright 2019 MicroEJ Corp.
+
+-->
+<project name="audio-impl-init">
+
+	<import file="${scripts.dir}/extension-init.xml" />
+
+	<target name="context/audio-impl" extensionOf="init/context">
+		
+	</target>
+	
+	<target name="init/audio-impl" extensionOf="init/execution">
+		
+	</target>
+	
+	
+	<target name="finalization/audio-impl" extensionOf="init/finalization">
+		
+	</target>
+	
+</project>

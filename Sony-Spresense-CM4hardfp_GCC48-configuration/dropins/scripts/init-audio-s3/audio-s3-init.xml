@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ANT Buildfile
+
+  Copyright 2019 MicroEJ Corp.
+
+-->
+<project name="audio-mock-s3-init">
+
+	<import file="${scripts.dir}/extension-init.xml" />
+
+	<target name="init/audio-mock-s3" extensionOf="init/execution" if="onS3">
+		<augment id="hil.main.classpath">
+			<fileset dir="${platform.dir}/mocks" includes="mockaudio-mock.jar"/>
+		</augment>
+
+		<!-- check the filesystem root dir -->
+		<condition property="audio.mock.root.dir" value="${com.microej.audio.mock.root}" else="${output.dir}/AUDIO">
+			<and>
+				<isset property="com.microej.audio.mock.root"/>
+				<not>
+					<equals arg1="${com.microej.audio.mock.root}" arg2="" trim="true"/>
+				</not>
+			</and>
+		</condition>
+		
+		<!-- ensure root dir is not a file -->
+		<fail message="Audio root dir '${audio.mock.root.dir}' targets a file, not a directory.">
+			<condition>
+				<available file="${audio.mock.root.dir}" type="file"/>
+			</condition>
+		</fail>
+		
+		<!--fs properties for the mock (mock root dir, path separator, etc.) -->
+		<augment id="hil.main.properties">
+			<propertyref name="audio.mock.root.dir"/>
+			<propertyref prefix="${fs.embedded.java.properties.prefix}"/>
+		</augment>
+
+	</target>
+</project>
