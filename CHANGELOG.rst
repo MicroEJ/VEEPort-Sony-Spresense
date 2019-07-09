@@ -1,6 +1,6 @@
-<!--
-	Markdown
--->
+..
+    Markdown
+..
 
 Changelog
 =========
@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [Unreleased]
 ------------
 
+[1.0.1] - 2019-07-09 
+--------------------
+
+Added
+`````````
+- Added importable Spresnese SDK configuration file as example.
+
+Modified
+````````
+- Fixed rst document file (syntax and hypertext link).
+
 [1.0.0] - 2019-07-09 
 --------------------
 
@@ -21,6 +32,8 @@ Added
 
 License
 -------
-_Copyright 2019 Sony Corp. All rights reserved._
-_This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp._
-_Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms._
+*Copyright 2019 Sony Corp. All rights reserved.*
+
+*This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp.*
+
+*Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms.*

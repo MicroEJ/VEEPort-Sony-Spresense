@@ -5,7 +5,7 @@
 ..
 
 ==============================
-Sony Spresense Platform v1.0.0
+Sony Spresense Platform v1.0.1
 ==============================
 
 Build Environment 
@@ -42,7 +42,7 @@ File System
 -----------
 You cannot use function :code:`chmod()` and :code:`utime()`, meaning you cannot modify permission or modified time. 
 
-You cannot open multiple stream on the same file.
+You cannot open multiple streams on the same file.
 
 RAM
 ---
@@ -50,7 +50,7 @@ Code is executed in RAM, therefore increasing the size of your application too m
 
 Validation
 ==========
-This platform has been passed the following tests :  
+This platform has passed the following tests :  
 
 - MJVM Portage Validation
 
@@ -60,3 +60,10 @@ This platform has been passed the following tests :
 
 - FileSystem Test Suite.
 
+License
+=======
+*Copyright 2019 Sony Corp. All rights reserved.*
+
+*This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp.*
+
+*Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms.*
