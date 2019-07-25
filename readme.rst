@@ -1,3 +1,9 @@
+..
+   Copyright 2019 MicroEJ Corp. All rights reserved.
+   For demonstration purpose only.
+   MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
+
+
 ===============================
 Sony Spresense MicroEJ Platform
 ===============================
@@ -23,19 +29,18 @@ The MicroEJ platform is configured with the following features:
 - HAL.
 - File System on SD Card.
 - GUI on LCD Display ILI9340 connected to the SPI Pins:
-
-   - Display SCK - Arduino Pin 13
-   - Display SDO(MISO) - Arduino Pin 12
-   - Display SDI(MOSI) - Arduino Pin 11
-   - Display CS - Arduino Pin 10
-   - Display D/C - Arduino Pin 9
-   - Display RESET - Arduino Pin 8
+    - Display SCK - Arduino Pin 13
+    - Display SDO(MISO) - Arduino Pin 12
+    - Display SDI(MOSI) - Arduino Pin 11
+    - Display CS - Arduino Pin 10
+    - Display D/C - Arduino Pin 9
+    - Display RESET - Arduino Pin 8
 
 Arborescence
 ============
 
 -  README.rst: The file you are currently reading.
--  microjvm: folders containing the implementation of the low level
+-  microej: folders containing the implementation of the low level
    API of the MicroEJ Runtime and foundations libraries. The folder is named like that because Sony Spresense's SDK has a naming convention for apps in its SDK. Since microEJ is declared as an app inside the SDK, it is necessary to follow this convention.
 
    - audio/: Implementation of a simple audio player application (based on the example given in the SDK) with SNI functions for an easy Java interface.
@@ -46,7 +51,7 @@ Arborescence
    - microej\_list/: C source library containing a linked list implementation.
    - osal/: C source library containing an operating system abstraction layer.
    - ui/: C sources files implementation for the Low Level APIs of the MicroUI display stack for the ILI9340 display.
-   - microjvm\_main.c: C source file containing the entry point of the application.
+   - microej\_main.c: C source file containing the entry point of the application.
    - inc/: Generated folder upon building your platform. Contains generated LLAPI headers.
    - lib/: Generated folder upon building your platform. Contains microej runtime library and microejapp object file containing your Java application.
    - Makefile
@@ -65,17 +70,13 @@ Arborescence
    - .project: Eclipse's project file in order to easily import the platform into MicroEJ's SDK.
 
 -  Sony-Spresense-CM4hardfp\_GCC48-fp/: Front panel folder.
+    - definitions/
+        - Sony-Spresense-CM4hardfp\_GCC48-fp.fp: The simulated display definition.
+        - widget.desc: Internal file used by the front panel. You should not touch this file.
+        - resources/: Contains the image of the front panel.
 
-   -  definitions/
-
-      -  Sony-Spresense-CM4hardfp\_GCC48-fp.fp: The simulated display definition.
-      -  widget.desc: Internal file used by the front panel. You should not touch this file.
-
-   -  resources/: Contains the image of the front panel.
-
-   - configs/
-
-      - microjvm-defconfig: an importable Spresense SDK configuration file running microjvm given as example.
+- configs/
+    - microej-defconfig: an importable Spresense SDK configuration file running microej given as example.
 
 -  microej.mk: Specific Makefile rules to integrate MicroEJ Platform
    into Sony Spresense's SDK.
@@ -93,22 +94,17 @@ Setup & Versions
 
 - The Sony Spresense SDK is made to work under a shell terminal; either a native Ubuntu, a Cygwin or using Windows Subsystem Linux (WSL).
 
-- The Sony Spresense SDK version required is v1.3.0.
+- The Sony Spresense SDK version required is **v1.3.0**.
 
 - For Windows 10 user or higher, we strongly suggest using WSL. How to install WSL:    https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
-- Installation gcc-arm-none-eabi v7.3.1 is required. You can find it at https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
+- gcc-arm-none-eabi **v7.3.1** is required. You can find it at https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
 
-- MicroEJ XPFP packs version is 7.11.0, Pack FS 5.0.0, Pack UI 12.0.0, Pack HAL 2.0.1.
-
-   - Download MEJ32 architecture 7.11 https://repository.microej.com/architectures/com/microej/architecture/CM4/CM4hardfp_GCC48/flopi4G25/7.11.0/flopi4G25-7.11.0-eval.xpf
-
+- MicroEJ Architecture packs version is 7.11.0, Pack FS version is 5.0.0, Pack UI version is 12.0.0, Pack HAL version 2.0.1.
+    - Download MicroEJ architecture 7.11 https://repository.microej.com/architectures/com/microej/architecture/CM4/CM4hardfp_GCC48/flopi4G25/7.11.0/flopi4G25-7.11.0-eval.xpf
     - Download Pack FS 5.0 https://repository.microej.com/architectures/com/microej/architecture/generic/fs/fs-pack/5.0.0/fs-5.0.0.xpfp
-
     - Download Pack UI 12.0 https://repository.microej.com/architectures/com/microej/architecture/CM4/CM4hardfp_GCC48/flopi4G25-ui-pack/12.0.0/flopi4G25UI-12.0.0.xpfp
-
     - Download Pack HAL 2.0.1 https://repository.microej.com/architectures/com/microej/architecture/generic/hal/hal-pack/2.0.1/hal-2.0.1.xpfp
-
     - You can install them in your SDK by going into Windows -> Preferences -> MicroEJ -> Architectures- > Import...
 
 - MicroEJ SDK Version 19.05 or higher. You can download it at https://developer.microej.com/packages/SDK/19.05/.
@@ -122,13 +118,14 @@ Step-by-steps Installation
     - :code:`$ cd spresense/`
     - :code:`$ git submodule update --init --recursive`
     - :code:`$ git checkout --recurse-submodules v1.3.0`
-    - :code:`$ git submodule add https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
+    - Step 1.1:
+        - :code:`$ git submodule add https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
+    - Step 1.1 - alternative: You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule:
+        - :code:`$ cd ..`
+        - :code:`$ git clone https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
+        - :code:`$ cd spresense`
+        - :code:`$ ln -s ../MicroEJ`
 
-You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule
-    - :code:`$ cd ..`
-    - :code:`$ git clone https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
-    - :code:`$ cd spresense`
-    - :code:`$ ln -s ../MicroEJ`
 
 -  Step 2 : Install MicroEJ SDK (version 19.05).
 
@@ -147,30 +144,24 @@ You can also git clone the MicroEJ folder outside and create a symlink in the sp
    -  Step 3.3: In Run -> Run Configuration... -> Tab execution,  check "Execute on Device". This will build a microejapp.o that contains your application.
 
 -  Step 4: Make sure the configuration of your SDK and NuttX is correct. For the NuttX configuration use the release configuration and enable the option :literal:`CONFIG_SYSTEMTICK_HOOK=y`.  :literal:`CONFIG_LIBM` must be disabled in the nuttx configuration.
-
-   - MicroEJ Platform require a LCD driver in the Spresense SDK configuration. Without a LCD Driver compiled in the BSP, symbols may be missing.
-
-   - Configure the SDK with the functionality needed and then add / remove the following:
-
-      - Either using Kconfig (recommended) instead of editing config file manually:
-      - :code:`$ tools/config.py -k -m` then select :literal:`RTOS Features -> Clocks and Timers -> System timer hook`
-      - For the SDK configuration, add :literal:`CONFIG_MICROJVM=y` and :literal:`CONFIG_LIBM_NEWLIB=y`.
-      - Using Kconfig:
-      - :code:`$ tools/config.py -m`then select :literal:`Library Routines -> Newlib Math library` and :literal:`Microjvm -> microjvm runtime`. It is also possible to select :literal:`MicroEJ Audio Library LLAPIs` and :literal:`MicroEJ gnss library LLAPIs`
+    - **This MicroEJ Platform require a LCD** driver in the Spresense SDK configuration. Without a LCD Driver compiled in the BSP, symbols may be missing.
 
    - Step 4.1:
        - :code:`$ cd spresense/sdk`.
-       - :code:`$ tools/config.py -k -m` to configure the kernel using Kconfig
-       - :code:`$ tools/config.py -k release` to configure the kernel using in release mode. If you do so you will need to manually (either via config or via editing the file in spresense/nuttx/.config) to add the property CONFIG_SYSTEMTICK_HOOK=y
+       - :code:`$ tools/config.py -k release` to configure the kernel using in release mode.
+       - :code:`$ tools/config.py -k -m` then select :literal:`RTOS Features -> Clocks and Timers -> System timer hook`
 
-   - Step 4.2 : Then configure the spresense SDK; Enable the properties you need, configure your shared memoery (if any), lcd screen (if any). Then add the property CONFIG_MICROJVM=y either manually or with Kconfig.
-
-         - If you want to boot directly on the Java runtime change the entry point to "microjvm_main". If so, make sure the board ioctl init function :code:`boardctl(BOARDIOC_INIT, 0);` is called (it should be the case by default).
+   - Step 4.2 :
+        - For the SDK configuration, add :literal:`CONFIG_MICROEJ=y` and :literal:`CONFIG_LIBM_NEWLIB=y`.
+        - :code:`$ tools/config.py -m`then select :literal:`Library Routines -> Newlib Math library` and :literal:`Microej -> microej runtime`. It is also possible to select :literal:`MicroEJ Audio Library LLAPIs` and :literal:`MicroEJ gnss library LLAPIs`
+        - Configure the spresense SDK; Enable the properties you need, configure your shared memoery (if any), lcd screen (if any).
+        - Add the property CONFIG_MICROEJ=y either manually or with Kconfig.
+        - If you want to boot directly on the Java runtime change the entry point to "microej_main". If so, make sure the board ioctl init function :code:`boardctl(BOARDIOC_INIT, 0);` is called (it should be the case by default).
 
    - Step 4.3: Type make buildkernel to compile NuttX.
    - Step 4.4: Type make to compile your firmware. You can flash it on board following the instruction on Sony Spresense's website https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/set-up-the-nuttx-environment . There also useful information in the ReadMe of the repository https://github.com/sonydevworld/spresense
 
-   - Step 5: The default configuration should be to define the entry point as "microjvm_main" in the .config file. You can use NSH as entry point, in which case you need to type the command :code:`microvjm` in the NSH command line. I highly recommand using the default configuration to avoid loading the NSH library for nothing and to avoid a manual command to start your application.
+   - Step 5: The default configuration should be to define the entry point as "microej_main" in the .config file. You can use NSH as entry point, in which case you need to type the command :code:`microvjm` in the NSH command line. I highly recommand using the default configuration to avoid loading the NSH library for nothing and to avoid a manual command to start your application.
 
 Tasks running
 ==================================================
@@ -204,9 +195,9 @@ in .config) can break your application on board if not enough memory is availabl
 Several symptoms may appear, depending on which memory zone is impacted
 and the memory allocation you are doing, such as :
 
-   - A failure to create task resulting in hardfault in os_startup.
-   - Code executing stopping without any uart trace.
-   - Impossibility to create a pthread (or a task), with a return code of 12 corresponding to the errno ENOMEM.
+- A failure to create task resulting in hardfault in os_startup.
+- Code executing stopping without any uart trace.
+- Impossibility to create a pthread (or a task), with a return code of 12 corresponding to the errno ENOMEM.
 
 If the board suddenly stops working, this is the FIRST thing you should
 check.
@@ -216,11 +207,9 @@ Additional Tips
 
 - The first time you flash the board you will be directed to download a zip containing a firmware.
 - When you flash a new board do not forget to flash the bootloade (read https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/nuttx-developer-guide#_flashing_bootloader).
-- The linker file given in the NuttX repository may not have the correct name. This result in the following error :literal:`arm-none-eabi-ld: cannot open linker script file /mnt/c/msys64/home/acolleux/spresense/sdk/../nuttx/configs/cxd56evb/scripts/gnu-elf.ld: No such file or directory`. To solve this you can simply create a symlink with the expected name
-
-    :code:`$ cd spresense//nuttx/configs/cxd56evb/scripts/`
-
-    :code:`$ ln -s ramconfig.ld gnu-elf.ld`
+- The linker file given in the NuttX repository may not have the correct name. This result in the following error :literal:`arm-none-eabi-ld: cannot open linker script file spresense/sdk/../nuttx/configs/cxd56evb/scripts/gnu-elf.ld: No such file or directory`. To solve this you can simply create a symlink with the expected name :
+    - :code:`$ cd spresense//nuttx/configs/cxd56evb/scripts/`
+    - :code:`$ ln -s ramconfig.ld gnu-elf.ld`
 
 - There are lots of examples in the SDK! To better understand how to configure your Spresense SDK, start by using the provided example.
 
@@ -234,34 +223,31 @@ Additional Tips
 
 If your system has gperf 3.0.4 or earlier, you may safely skip this chapter. gperf 3.1 (released on 5th January of 2017) changed the type used as length argument in generated functions from unsigned int to size_t. This will cause your build to fail with following error message:
 
-:literal:`CC     libkconfig_parser_la-yconf.lo`
-:literal:`In file included from yconf.c:234:0:`
-:literal:`hconf.gperf:141:1: error: conflicting types for 'kconf_id_lookup'`
-:literal:`hconf.gperf:12:31: note: previous declaration of 'kconf_id_lookup' was here`
-:literal:`static const struct kconf_id *kconf_id_lookup(register const char *str, register unsigned int len);`
+::
 
-:literal:`make[3]: *** [Makefile:456: libkconfig_parser_la-yconf.lo] Error 1`
-:literal:`make[2]: *** [Makefile:350: all] Error 2`
-:literal:`make[1]: *** [Makefile:334: all-recursive] Error 1`
-:literal:`make: *** [Makefile:385: all-recursive] Error 1`
+    CC     libkconfig_parser_la-yconf.lo
+    In file included from yconf.c:234:0:
+    hconf.gperf:141:1: error: conflicting types for 'kconf_id_lookup'
+    hconf.gperf:12:31: note: previous declaration of 'kconf_id_lookup' was here
+    static const struct kconf_id *kconf_id_lookup(register const char *str, register unsigned int len);
+
+    make[3]: *** [Makefile:456: libkconfig_parser_la-yconf.lo] Error 1
+    make[2]: *** [Makefile:350: all] Error 2
+    make[1]: *** [Makefile:334: all-recursive] Error 1
+    make: *** [Makefile:385: all-recursive] Error 1
 
 - The procedure to fix is below:
-
-:code:`$ curl -O https://gist.githubusercontent.com/KamilSzczygiel/d16a5d88075939578f7bd8fadd0907aa/raw/1928495cfb6a6141365d545a23d66203222d28c0/kconfig-frontends.patch`
-
-:code:`$ patch -p1 -i kconfig-frontends.patch`
-
-:code:`$ autoreconf -fi`
+    - :code:`$ curl -O https://gist.githubusercontent.com/KamilSzczygiel/d16a5d88075939578f7bd8fadd0907aa/raw/1928495cfb6a6141365d545a23d66203222d28c0/kconfig-frontends.patch`
+    - :code:`$ patch -p1 -i kconfig-frontends.patch`
+    - :code:`$ autoreconf -fi`
 
 - To use the Audio and Gnss library in Java you must add to the configuration CONFIG_MICROEJ_AUDIOPLAYER and CONFIG_MICROEJ_GNSS respectively.
 
+- When the MicroEJ project is modified, clean the Spresense SDK directory with make clean & make cleankernel (before flashing the board).
 
+Note on multicore
+==================
 
-License
-==================================================
+The MicroEJ runtime environment is executed in internal RAM on the main CPU of the board.
+It is perfectly possible to execute code in parallel on other CPU while the MicroEJ runtime environment is running.
 
-*Copyright 2019 Sony Corp. All rights reserved.*
-
-*This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp.*
-
-*Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms.*

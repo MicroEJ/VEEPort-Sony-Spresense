@@ -9,11 +9,16 @@
 ############################################################################
 MICROEJ_DIR = $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ
 
-MICROEJ_JAVA_OBJ_PATH = $(MICROEJ_DIR)$(DELIM)microjvm$(DELIM)lib
+MICROEJ_JAVA_OBJ_PATH = $(MICROEJ_DIR)$(DELIM)microej$(DELIM)lib
 
 MICROEJ_JAVA_OBJ_NAME = microejapp$(OBJEXT)
 
-MICROEJ_FLAGS += -I $(MICROEJ_DIR)$(DELIM)microjvm$(DELIM)inc
+MICROEJ_FLAGS += -I $(MICROEJ_DIR)$(DELIM)microej$(DELIM)inc
+CFLAGS += -Wno-pointer-to-int-cast
+CFLAGS += -Wno-pointer-sign
+CFLAGS += -Wno-strict-prototypes
+CFLAGS += -Wno-incompatible-pointer-types
+
 ############################################################################
 # MicroEJ Platform Path
 ############################################################################
