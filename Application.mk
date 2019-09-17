@@ -38,7 +38,7 @@
 
 include $(SDKDIR)/.config
 include $(APPDIR)/Make.defs
-ifeq ($(CONFIG_MICROJVM),y)
+ifeq ($(CONFIG_MICROEJ),y)
 include $(SDKDIR)$(DELIM)../MicroEJ$(DELIM)microej.mk
 endif
 
@@ -56,8 +56,8 @@ endif
 
 SRCS = $(ASRCS) $(CSRCS) $(CXXSRCS) $(MAINSRC)
 OBJS = $(AOBJS) $(COBJS) $(CXXOBJS)
-ifeq ($(CONFIG_MICROJVM),y)
-OBJS += $(MICROEJ_JAVA_OBJ_PATH)$(DELIM)$(MICROEJ_JAVA_OBJ_NAME) 
+ifeq ($(CONFIG_MICROEJ),y)
+OBJS += $(MICROEJ_JAVA_OBJ_PATH)$(DELIM)$(MICROEJ_JAVA_OBJ_NAME)
 CFLAGS += $(MICROEJ_FLAGS)
 CXXFLAGS += $(MICROEJ_FLAGS)
 endif
@@ -67,10 +67,10 @@ ifneq ($(CONFIG_BUILD_KERNEL),y)
 endif
 
 ifeq ($(WINTOOL),y)
-  BIN = "${shell cygpath -w $(APPDIR)$(DELIM)libmicrojvm$(LIBEXT)}"
+  BIN = "${shell cygpath -w $(APPDIR)$(DELIM)libmicroej$(LIBEXT)}"
   INSTALL_DIR = "${shell cygpath -w $(BIN_DIR)}"
 else
-  BIN = $(APPDIR)$(DELIM)libmicrojvm$(LIBEXT)
+  BIN = $(APPDIR)$(DELIM)libmicroej$(LIBEXT)
   INSTALL_DIR = $(BIN_DIR)
 endif
 
@@ -80,7 +80,7 @@ VPATH =
 
 all: .built
 .PHONY: clean preconfig depend distclean
-.PRECIOUS: $(APPDIR)/libmicrojvm$(LIBEXT)
+.PRECIOUS: $(APPDIR)/libmicroej$(LIBEXT)
 
 $(AOBJS): %$(OBJEXT): %.S
 	$(call ASSEMBLE, $<, $@)

@@ -34,20 +34,20 @@
 #
 ############################################################################
 
-$(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)libmicrojvm$(LIBEXT): context
+$(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)libmicroej$(LIBEXT): context
 	$(Q) $(MAKE) -C $(dir $@) TOPDIR="$(TOPDIR)" SDKDIR="$(SDKDIR)" $(notdir $@)
 
-lib$(DELIM)libmicrojvm$(LIBEXT): $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)libmicrojvm$(LIBEXT)
+lib$(DELIM)libmicroej$(LIBEXT): $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)libmicroej$(LIBEXT)
 	$(Q) install $< $@
 
-EXTLIBS +=  lib$(DELIM)libmicrojvm$(LIBEXT)
+EXTLIBS +=  lib$(DELIM)libmicroej$(LIBEXT)
 
 
-ifeq ($(CONFIG_MICROJVM),y)
+ifeq ($(CONFIG_MICROEJ),y)
 
 include $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)microej.mk
-lib$(DELIM)libmicroejruntime$(LIBEXT): $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)microjvm$(DELIM)lib$(DELIM)microejruntime$(LIBEXT)
+lib$(DELIM)libmicroejruntime$(LIBEXT): $(SDKDIR)$(DELIM)..$(DELIM)MicroEJ$(DELIM)microej$(DELIM)lib$(DELIM)microejruntime$(LIBEXT)
 	$(Q) install $< $@
- 
+
 EXTLIBS +=  lib$(DELIM)libmicroejruntime$(LIBEXT)
 endif

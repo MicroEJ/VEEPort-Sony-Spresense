@@ -1,10 +1,8 @@
 ############################################################################
-# Makefile
+#   Copyright (C) 2015 Gregory Nutt. All rights reserved.
+#   Author: Gregory Nutt <gnutt@nuttx.org>
 #
-#   Copyright 2018 Sony Semiconductor Solutions Corporation
-#   Copyright 2019 Sony Corp . All rights reserved.
-#   This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp.
-#   Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms.
+#   This file has been modified by MicroEJ Corp (2019).
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -16,10 +14,9 @@
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
-# 3. Neither the name of Sony Semiconductor Solutions Corporation nor
-#    the names of its contributors may be used to endorse or promote
-#    products derived from this software without specific prior written
-#    permission.
+# 3. Neither the name NuttX nor the names of its contributors may be
+#    used to endorse or promote products derived from this software
+#    without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -35,8 +32,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ############################################################################
-MENUDESC = "MicroEJ"
 
-BIN = libmicroej$(LIBEXT)
-
-include $(SDKDIR)/Makefile.ext
+ifeq ($(CONFIG_MICROEJ),y)
+CONFIGURED_APPS += microej
+endif
