@@ -94,7 +94,7 @@ Setup & Versions
 
 - The Sony Spresense SDK is made to work under a shell terminal; either a native Ubuntu, a Cygwin or using Windows Subsystem Linux (WSL).
 
-- The Sony Spresense SDK version required is **v1.3.0**.
+- The Sony Spresense SDK version required is **v1.4.0**.
 
 - For Windows 10 user or higher, we strongly suggest using WSL. How to install WSL:    https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
@@ -115,12 +115,13 @@ Step-by-steps Installation
 
 - Step 0: Configure your bash environment (mostly for WSYS32, Windows Subsystem Linux) and make sure Spresense SDK dependencies are installed
     - The process is described here https://developer.sony.com/develop/spresense/docs/sdk_set_up_en.html#_setup_for_linux
+    - When using WSL along a Windows environment be wary of the file permission, :literal:`\r\n` end of line. Look into :literal:`dos2unix` utilities and build-essential
 
-- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.3.0)
+- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.4.0)
     - :code:`$ git clone https://github.com/sonydevworld/spresense.git`
     - :code:`$ cd spresense/`
     - :code:`$ git submodule update --init --recursive`
-    - :code:`$ git checkout --recurse-submodules v1.3.0`
+    - :code:`$ git checkout --recurse-submodules v1.4.0`
     - Step 1.1
         - :code:`$ git submodule add https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
     - Step 1.1 - alternative: You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule
