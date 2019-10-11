@@ -28,7 +28,7 @@ The MicroEJ platform is configured with the following features:
 - MEJ32 for ARM Cortex-M4 / GCC
 - HAL.
 - File System on SD Card.
-- GUI on LCD Display ILI9340 connected to the SPI Pins:
+- GUI on LCD Display ILI9340 connected to the SPI Pins
     - Display SCK - Arduino Pin 13
     - Display SDO(MISO) - Arduino Pin 12
     - Display SDI(MOSI) - Arduino Pin 11
@@ -69,13 +69,13 @@ Arborescence
    - Spresense.platform: Platform file.
    - .project: Eclipse's project file in order to easily import the platform into MicroEJ's SDK.
 
--  Sony-Spresense-CM4hardfp\_GCC48-fp/: Front panel folder.
-    - definitions/
+-  Sony-Spresense-CM4hardfp\_GCC48-fp/: Front panel folder
+    - definitions
         - Sony-Spresense-CM4hardfp\_GCC48-fp.fp: The simulated display definition.
         - widget.desc: Internal file used by the front panel. You should not touch this file.
         - resources/: Contains the image of the front panel.
 
-- configs/
+- configs
     - microej-defconfig: an importable Spresense SDK configuration file running microej given as example.
 
 -  microej.mk: Specific Makefile rules to integrate MicroEJ Platform
@@ -94,13 +94,13 @@ Setup & Versions
 
 - The Sony Spresense SDK is made to work under a shell terminal; either a native Ubuntu, a Cygwin or using Windows Subsystem Linux (WSL).
 
-- The Sony Spresense SDK version required is **v1.3.0**.
+- The Sony Spresense SDK version required is **v1.4.0**.
 
 - For Windows 10 user or higher, we strongly suggest using WSL. How to install WSL:    https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 - gcc-arm-none-eabi **v7.3.1** is required. You can find it at https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
 
-- MicroEJ Architecture packs version is 7.11.0, Pack FS version is 5.0.0, Pack UI version is 12.0.0, Pack HAL version 2.0.1.
+- MicroEJ Architecture packs version is 7.11.0, Pack FS version is 5.0.0, Pack UI version is 12.0.0, Pack HAL version 2.0.1
     - Download MicroEJ architecture 7.11 https://repository.microej.com/architectures/com/microej/architecture/CM4/CM4hardfp_GCC48/flopi4G25/7.11.0/flopi4G25-7.11.0-eval.xpf
     - Download Pack FS 5.0 https://repository.microej.com/architectures/com/microej/architecture/generic/fs/fs-pack/5.0.0/fs-5.0.0.xpfp
     - Download Pack UI 12.0 https://repository.microej.com/architectures/com/microej/architecture/CM4/CM4hardfp_GCC48/flopi4G25-ui-pack/12.0.0/flopi4G25UI-12.0.0.xpfp
@@ -113,55 +113,55 @@ Setup & Versions
 Step-by-steps Installation
 ==========================
 
-- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.3.0)
+- Step 0: Configure your bash environment (mostly for WSYS32, Windows Subsystem Linux) and make sure Spresense SDK dependencies are installed
+    - The process is described here https://developer.sony.com/develop/spresense/docs/sdk_set_up_en.html#_setup_for_linux
+    - When using WSL along a Windows environment be wary of the file permission, :literal:`\r\n` end of line. Look into :literal:`dos2unix` utilities and build-essential
+
+- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.4.0)
     - :code:`$ git clone https://github.com/sonydevworld/spresense.git`
     - :code:`$ cd spresense/`
     - :code:`$ git submodule update --init --recursive`
-    - :code:`$ git checkout --recurse-submodules v1.3.0`
-    - Step 1.1:
+    - :code:`$ git checkout --recurse-submodules v1.4.0`
+    - Step 1.1
         - :code:`$ git submodule add https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
-    - Step 1.1 - alternative: You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule:
+    - Step 1.1 - alternative: You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule
         - :code:`$ cd ..`
         - :code:`$ git clone https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
         - :code:`$ cd spresense`
         - :code:`$ ln -s ../MicroEJ`
 
-
 -  Step 2 : Install MicroEJ SDK (version 19.05).
-
-   -  Step 2.1: Download the SDK evaluation license from http://license.microej.com/ or get a production license. Verifiy that the version of each pack correspond to the versions in "Setup and Versions".
-   -  Step 2.2 : Install the architecure. Go to Windows -> Preferences -> MicroEJ -> Architecture -> Import...
-   -  Step 2.3: File -> Import... -> General -> Existing Projects into Workspace -> Select root directory -> Point to the MicroEJ directory.
-   -  Step 2.4: Open the Spresense.platform file. You may configure what is included in the MicroEJ platform in the Content tab by selecting content (or not).
-   -  Step 2.5: In the Overview tab, click on build platform.
+    - Step 2.1: Download the SDK evaluation license from http://license.microej.com/ or get a production license. Verifiy that the version of each pack correspond to the versions in "Setup and Versions".
+    - Step 2.2 : Install the architecure. Go to Windows -> Preferences -> MicroEJ -> Architecture -> Import...
+    - Step 2.3: File -> Import... -> General -> Existing Projects into Workspace -> Select root directory -> Point to the MicroEJ directory.
+    - Step 2.4: Open the Spresense.platform file. You may configure what is included in the MicroEJ platform in the Content tab by selecting content (or not).
+    - Step 2.5: In the Overview tab, click on build platform.
 
 -  Step 3: Create a Java Application.
+    - Step 3.1: In MicroEJ SDK either open an existing app or create a new
+        - MicroEJ Application with a simple hello world for now
 
-   -  Step 3.1: In MicroEJ SDK either open an existing app or create a new
-      MicroEJ Application with a simple hello world for now.
-   -  Step 3.2: Select the appliaction folder. Then create a new MicroEJ Launcher.
-   -  Step 3.2: In the tab Execution, check that the selected Platform is correct. Then select "Execute on Simulator". This will run the Java application in the simulator.
-   -  Step 3.3: In Run -> Run Configuration... -> Tab execution,  check "Execute on Device". This will build a microejapp.o that contains your application.
+    - Step 3.2: Select the folder of your project (for example :literal:`gui-example` from the getting-started). Then create a new MicroEJ Launcher.
+    - Step 3.2: In the tab Execution, check that the selected Platform is correct. Then select "Execute on Simulator". This will run the Java application in the simulator.
+    - Step 3.3: In Run -> Run Configuration... -> Tab execution,  check "Execute on Device". This will build a microejapp.o that contains your application.
 
--  Step 4: Make sure the configuration of your SDK and NuttX is correct. For the NuttX configuration use the release configuration and enable the option :literal:`CONFIG_SYSTEMTICK_HOOK=y`.  :literal:`CONFIG_LIBM` must be disabled in the nuttx configuration.
+- Step 4: Make sure the configuration of your SDK and NuttX is correct. For the NuttX configuration use the release configuration and enable the option :literal:`CONFIG_SYSTEMTICK_HOOK=y`.  :literal:`CONFIG_LIBM` must be disabled in the nuttx configuration.
     - **This MicroEJ Platform require a LCD** driver in the Spresense SDK configuration. Without a LCD Driver compiled in the BSP, symbols may be missing.
-
-   - Step 4.1:
-       - :code:`$ cd spresense/sdk`.
-       - :code:`$ tools/config.py -k release` to configure the kernel using in release mode.
-       - :code:`$ tools/config.py -k -m` then select :literal:`RTOS Features -> Clocks and Timers -> System timer hook`
-
-   - Step 4.2 :
-        - For the SDK configuration, add :literal:`CONFIG_MICROEJ=y` and :literal:`CONFIG_LIBM_NEWLIB=y`.
-        - :code:`$ tools/config.py -m`then select :literal:`Library Routines -> Newlib Math library` and :literal:`Microej -> microej runtime`. It is also possible to select :literal:`MicroEJ Audio Library LLAPIs` and :literal:`MicroEJ gnss library LLAPIs`
-        - Configure the spresense SDK; Enable the properties you need, configure your shared memoery (if any), lcd screen (if any).
-        - Add the property CONFIG_MICROEJ=y either manually or with Kconfig.
+    - Step 4.1:
+        - :code:`$ cd spresense/sdk`.
+        - :code:`$ tools/config.py -k release` to configure the kernel using in release mode.
+        - :code:`$ tools/config.py -k -m` then select :literal:`RTOS Features -> Clocks and Timers -> System timer hook`
+        - Don't forget to save your configuration !
+        - Type :code:`make buildkernel` to compile NuttX.
+    - Step 4.2 :
+        - For the SDK configuration, add :literal:`CONFIG_MICROEJ=y` and :literal:`CONFIG_LIBM_NEWLIB=y`:
+            - :code:`$ tools/config.py -m` then select :literal:`Library Routines -> Newlib Math library` and :literal:`Microej -> microej runtime`.
+            - Select :literal:`MicroEJ Audio Library LLAPIs` and :literal:`MicroEJ gnss library LLAPIs` if needed
+        - Configure the spresense SDK; Enable the properties you need, configure your shared memory (if any), lcd screen (if any).
         - If you want to boot directly on the Java runtime change the entry point to "microej_main". If so, make sure the board ioctl init function :code:`boardctl(BOARDIOC_INIT, 0);` is called (it should be the case by default).
-
-   - Step 4.3: Type make buildkernel to compile NuttX.
-   - Step 4.4: Type make to compile your firmware. You can flash it on board following the instruction on Sony Spresense's website https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/set-up-the-nuttx-environment . There also useful information in the ReadMe of the repository https://github.com/sonydevworld/spresense
-
-   - Step 5: The default configuration should be to define the entry point as "microej_main" in the .config file. You can use NSH as entry point, in which case you need to type the command :code:`microvjm` in the NSH command line. I highly recommand using the default configuration to avoid loading the NSH library for nothing and to avoid a manual command to start your application.
+        - Don't forget to save your configuration !
+    - Step 4.4: Type :code:`make` to compile your firmware. You can flash it on board following the instruction on Sony Spresense's website https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/set-up-the-nuttx-environment . There also useful information in the ReadMe of the repository https://github.com/sonydevworld/spresense
+    - Step 5: The default configuration should be to define the entry point as "microej_main" in the .config file. You can use NSH as entry point, in which case you need to type the command :code:`microvjm` in the NSH command line. I highly recommand using the default configuration to avoid loading the NSH library for nothing and to avoid a manual command to start your application.
 
 Tasks running
 ==================================================

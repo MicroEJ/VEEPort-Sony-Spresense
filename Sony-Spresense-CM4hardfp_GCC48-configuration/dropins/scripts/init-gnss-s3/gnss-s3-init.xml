@@ -11,7 +11,7 @@
 
 	<target name="init/gnss-s3" extensionOf="init/execution" if="onS3">
 		<augment id="hil.main.classpath">
-			<fileset dir="${platform.dir}/mocks" includes="mockgnss.jar"/>
+			<fileset dir="${platform.dir}/mocks" includes="mockgnss-mock.jar"/>
 		</augment>
 	</target>
 
