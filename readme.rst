@@ -94,7 +94,7 @@ Setup & Versions
 
 - The Sony Spresense SDK is made to work under a shell terminal; either a native Ubuntu, a Cygwin or using Windows Subsystem Linux (WSL).
 
-- The Sony Spresense SDK version required is **v1.4.0**.
+- The Sony Spresense SDK version required is **v1.3.1**.
 
 - For Windows 10 user or higher, we strongly suggest using WSL. How to install WSL:    https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
@@ -113,22 +113,21 @@ Setup & Versions
 Step-by-steps Installation
 ==========================
 
-- Step 0: Configure your bash environment (mostly for WSYS32, Windows Subsystem Linux) and make sure Spresense SDK dependencies are installed
-    - The process is described here https://developer.sony.com/develop/spresense/docs/sdk_set_up_en.html#_setup_for_linux
-    - When using WSL along a Windows environment be wary of the file permission, :literal:`\r\n` end of line. Look into :literal:`dos2unix` utilities and build-essential
+- Step 0: Configure your bash environment.
+    - The process is described here https://developer.sony.com/develop/spresense/docs/sdk_set_up_en.htm . Note that with windows 10 It is recommanded to use Windows Subsystem Linux instead of MSYS2 (steps are the same) for a better integration of the filesystems between Linux and Windows.
+    - Install develoment tools:
+        - :code:`wget https://raw.githubusercontent.com/sonydevworld/spresense/master/install-tools.sh`
+        - :code:`bash install-tools.sh`
+    - Source your envinronment :code:`source ~/spresenseenv/setup`
+    - When using WSL along a Windows environment you may encounter issues with :literal:`\\r\\n` end of line. Using tools such as :literal:`dos2unix` utilities and :literal:`build-essential`.
 
-- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.4.0)
+- Step 1: Execute the following line to clone Spresense's SDK, checked out on the correct version (v1.3.1)
     - :code:`$ git clone https://github.com/sonydevworld/spresense.git`
     - :code:`$ cd spresense/`
     - :code:`$ git submodule update --init --recursive`
-    - :code:`$ git checkout --recurse-submodules v1.4.0`
-    - Step 1.1
+    - :code:`$ git checkout --recurse-submodules v1.3.1`
+    - Step 1.1: Add MicroEJ to Spresense SDK
         - :code:`$ git submodule add https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
-    - Step 1.1 - alternative: You can also git clone the MicroEJ folder outside and create a symlink in the spresense folder if you do not want to add a submodule
-        - :code:`$ cd ..`
-        - :code:`$ git clone https://github.com/MicroEJ/Platform-Sony-Spresense.git MicroEJ`
-        - :code:`$ cd spresense`
-        - :code:`$ ln -s ../MicroEJ`
 
 -  Step 2 : Install MicroEJ SDK (version 19.05).
     - Step 2.1: Download the SDK evaluation license from http://license.microej.com/ or get a production license. Verifiy that the version of each pack correspond to the versions in "Setup and Versions".
@@ -202,24 +201,44 @@ and the memory allocation you are doing, such as :
 If the board suddenly stops working, this is the FIRST thing you should
 check.
 
-Additional Tips
+
+Additionnal informations
 ==================================================
 
-- The first time you flash the board you will be directed to download a zip containing a firmware.
+Do NOT forget to flash the bootloader
+-----------------------------------------------------
+
+The first time you flash the board you will be directed to download a zip containing a firmware.
+
+Error on link during the first compilation
+---------------------------------------------------------
 - When you flash a new board do not forget to flash the bootloade (read https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/nuttx-developer-guide#_flashing_bootloader).
 - The linker file given in the NuttX repository may not have the correct name. This result in the following error :literal:`arm-none-eabi-ld: cannot open linker script file spresense/sdk/../nuttx/configs/cxd56evb/scripts/gnu-elf.ld: No such file or directory`. To solve this you can simply create a symlink with the expected name :
     - :code:`$ cd spresense//nuttx/configs/cxd56evb/scripts/`
     - :code:`$ ln -s ramconfig.ld gnu-elf.ld`
 
+Explore the Spresense SDK
+--------------------------------------------------------
 - There are lots of examples in the SDK! To better understand how to configure your Spresense SDK, start by using the provided example.
 
 - The Spresense SDK is highly configurable. The configuration of the SDK will have a great impact on the amount of RAM available and the functionnalities available. We recommend first configuring your SDK and then starting the integration of your Java application on board. You will have to configure the Java heap and Image heap you use depending on the size of your application and the available ram.
 
-- If some hardfaults occurs, the board do not start or suddenly stops (without any UART trace), asserts fails, it is often due to a lack of RAM. This probably means that your Java application uses too much resources.
-  When you use microEJ you add areas in RAM with a fixed size in your Run Configuration... . A wrong size given the Run Configuration... of your Java application can cause problems on-board.
-  This is why it is critical to use the simulator to find the minimum resources you can use for your application in RAM and also to correctly configure your Spresense SDK during your development process, if you encounter a bug as previously described the FIRST thing you need to check is how much RAM you use in the Java Heap, Image Heap in your MicroEJ Run Configuration... and how much memory you use in the SDK and-application code.
 
-- When installing kconfig front end for the Spresense SDK setup you may encouter this problem :
+Be wary of your RAM usage
+----------------------------------------------------------------------
+If some hardfaults occurs, the board do not start or suddenly stops (without any UART trace), asserts fails, it is often due to a lack of RAM.
+
+This probably means that your Java application uses too much resources. When you use microEJ you add areas in RAM with a fixed size in your Run Configuration... .
+
+A wrong size given the Run Configuration... of your Java application can cause problems on-board.
+
+This is why it is critical to use the simulator to find the minimum resources you can use for your application in RAM and also to correctly configure your Spresense SDK during your development process, if you encounter a bug as previously described the FIRST thing you need to check is how much RAM you use in the Java Heap, Image Heap in your MicroEJ Run Configuration... and how much memory you use in the SDK and-application code.
+
+
+gperf3.1 error on some systems
+-------------------------------------------------------------------
+
+When installing kconfig front end for the Spresense SDK setup you may encouter this problem :
 
 If your system has gperf 3.0.4 or earlier, you may safely skip this chapter. gperf 3.1 (released on 5th January of 2017) changed the type used as length argument in generated functions from unsigned int to size_t. This will cause your build to fail with following error message:
 

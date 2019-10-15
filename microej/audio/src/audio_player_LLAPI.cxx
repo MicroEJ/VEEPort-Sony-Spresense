@@ -204,7 +204,7 @@ extern "C"
     sni_ctx.result = ret;
   }
 
-  void Java_audio_player_set_volume(double volume_db)
+  void Java_audio_player_set_volume(float volume_db)
   {
     if (volume_db >= AUDIO_PLAYER_VOLUME_MAX_GAIN)
     {

@@ -11,7 +11,6 @@ void LLCOMM_IMPL_initialize(void)
 {
     // create MicroEJ UART connection
     LLCOMM_UART_new(&LLCOMM_UARTs[0].header);
-
     // add MicroEJ UART connection into MicroEJ framework as generic connection
     LLCOMM_addConnection((LLCOMM_CONNECTION *)&LLCOMM_UARTs[0].header);
 }

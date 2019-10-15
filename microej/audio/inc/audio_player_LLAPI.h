@@ -42,7 +42,7 @@ extern "C"
                                      uint8_t codec_type,
                                      int duration);
 
-    void Java_audio_player_set_volume(double volume_db);
+    void Java_audio_player_set_volume(float volume_db);
     void Java_audio_player_mute(void);
 
     /* Function throwing exception if the last command failed */
