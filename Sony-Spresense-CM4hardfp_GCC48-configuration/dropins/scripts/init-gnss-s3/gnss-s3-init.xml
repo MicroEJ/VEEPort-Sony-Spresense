@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ANT Buildfile
+	ANT Buildfile
 
-  Copyright 2019 MicroEJ Corp.
-
+	Copyright 2019 MicroEJ Corp. All rights reserved.
+	MicroEJ Corp PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 -->
 <project name="gnss-s3-init">
 
@@ -12,6 +12,11 @@
 	<target name="init/gnss-s3" extensionOf="init/execution" if="onS3">
 		<augment id="hil.main.classpath">
 			<fileset dir="${platform.dir}/mocks" includes="mockgnss-mock.jar"/>
+		</augment>
+		
+		<!--Wi-Fi properties for the mock -->
+		<augment id="hil.main.properties">
+			<propertyref name="com.is2t.gnss.embedded.mock.ui" />
 		</augment>
 	</target>
 

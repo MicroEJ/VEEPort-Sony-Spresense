@@ -5,7 +5,7 @@
 ..
 
 ==============================
-Sony Spresense Platform v1.0.2
+Sony Spresense Platform v1.0.5
 ==============================
 
 Build Environment
@@ -62,7 +62,7 @@ This platform has passed the following tests :
 
  Known Issue
 =============
-ecom-com implementation sometimes does not communicate properly when receiving message.
+Using Sony Spresense SDK version superior to 1.3.1 may cause some issues with audio library and volume manipulation.
 
 License
 =======
