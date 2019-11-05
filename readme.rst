@@ -47,7 +47,7 @@ Arborescence
    - core/: C sources file implementation of the core of the low level APIs of MicroEJ runtime.
    - fs/: C sources implementaton of the file system low level APIs.
    - gnss/: Implementation of a simple gnss application (based on the example given in the SDK) with SNI functions for an easy Java interface.
-   - microej\_async\_worker/: C source library to execute asynchronuous functions.
+   - microej\_async\_worker/: C source library to execute asynchronous functions.
    - microej\_list/: C source library containing a linked list implementation.
    - osal/: C source library containing an operating system abstraction layer.
    - ui/: C sources files implementation for the Low Level APIs of the MicroUI display stack for the ILI9340 display.
@@ -110,12 +110,12 @@ Setup & Versions
 - MicroEJ SDK Version 19.05 or higher. You can download it at https://developer.microej.com/packages/SDK/19.05/.
 
 
-Step-by-steps Installation
+Step-by-step Installation
 ==========================
 
 - Step 0: Configure your bash environment.
     - The process is described here https://developer.sony.com/develop/spresense/docs/sdk_set_up_en.htm . Note that with windows 10 It is recommanded to use Windows Subsystem Linux instead of MSYS2 (steps are the same) for a better integration of the filesystems between Linux and Windows.
-    - Install develoment tools:
+    - Install development tools:
         - :code:`wget https://raw.githubusercontent.com/sonydevworld/spresense/master/install-tools.sh`
         - :code:`bash install-tools.sh`
     - Source your envinronment :code:`source ~/spresenseenv/setup`
@@ -202,7 +202,7 @@ If the board suddenly stops working, this is the FIRST thing you should
 check.
 
 
-Additionnal informations
+Additional informations
 ==================================================
 
 Do NOT forget to flash the bootloader
@@ -212,7 +212,7 @@ The first time you flash the board you will be directed to download a zip contai
 
 Error on link during the first compilation
 ---------------------------------------------------------
-- When you flash a new board do not forget to flash the bootloade (read https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/nuttx-developer-guide#_flashing_bootloader).
+- When you flash a new board do not forget to flash the bootloader (read https://developer.sony.com/develop/spresense/developer-tools/get-started-using-nuttx/nuttx-developer-guide#_flashing_bootloader).
 - The linker file given in the NuttX repository may not have the correct name. This result in the following error :literal:`arm-none-eabi-ld: cannot open linker script file spresense/sdk/../nuttx/configs/cxd56evb/scripts/gnu-elf.ld: No such file or directory`. To solve this you can simply create a symlink with the expected name :
     - :code:`$ cd spresense//nuttx/configs/cxd56evb/scripts/`
     - :code:`$ ln -s ramconfig.ld gnu-elf.ld`
