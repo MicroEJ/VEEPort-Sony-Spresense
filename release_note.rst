@@ -2,7 +2,6 @@
     Copyright 2019 MicroEJ Corp. All rights reserved.
     This Software has been designed by MicroEJ Corp and all rights have been transferred to Sony Corp.
     Sony Corp. has granted MicroEJ the right to sub-licensed this Software under the enclosed license terms.
-..
 
 ==============================
 Sony Spresense Platform v1.0.5
